@@ -1,0 +1,49 @@
+grafana_src:
+  api_token:  # Grafana API access token (Generate in your grafana instance, must be "Editor" level)
+    oc_default: null
+    oc_schema:
+      type: string
+      nullable: true
+  url:  # Root URL of your grafana instance.
+    oc_default: null
+    oc_schema:
+      type: string
+  published_tag:  # Tag that marks tracked dashboards
+    oc_default: "Published"
+    oc_schema:
+      type: string
+  publish_message:  # Tag that marks dashboard versions that shall be published.
+    oc_default: "Publish"
+    oc_schema:
+      type: string
+
+target_repo:
+  repo_url: ""  # Target repository URL. Use "local" for work on local repo.
+  clone_path:    # Directory path to which the target repo is/will be cloned.
+    oc_default: "."
+    oc_schema:
+      type: string
+  dashboard_path:  # Directory path within the target repo that contains the dashboard folder/file structure.
+    oc_default: null
+    oc_schema:
+      type: string
+  branch:  # Which branch on the target repo should be used to commit updates.
+    oc_default: master
+    oc_schema:
+      type: string
+  gitlab:   # If the target repo is on Gitlab instance, it's API can be used to check the update status without cloning.
+    url:    # URL of the Gitlab instance storing the target repo.
+      oc_default: null
+      oc_schema:
+        type: string
+        nullable: true
+    access_token:  # Access token for the Gitlab repo.
+      oc_default: null
+      oc_schema:
+        type: string
+        nullable: true
+    project_id:  # Project ID for the repo on the Gitlab instance.
+      oc_default: null
+      oc_schema:
+        type: integer
+        nullable: true
