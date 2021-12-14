@@ -27,8 +27,8 @@ classifiers = [
 # List project dependencies here
 python = "^3.6"
 click = "^8.0.1"
-onacol = "^0.3.0"
 arrow = "^0.12.1"
+onacol = "^0.3.1"
 requests = "^2.18.4"
 pathvalidate = "^2.5.0"
 
