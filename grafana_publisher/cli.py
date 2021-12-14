@@ -32,7 +32,7 @@ def main(ctx, config, get_config_template):
     # Instantiate config_manager
     config_manager = ConfigManager(
         DEFAULT_CONFIG_FILE,
-        env_var_prefix="grafana_publisher",
+        env_var_prefix="grafpub",
         optional_files=[config] if config else []
     )
 
@@ -56,7 +56,7 @@ def main(ctx, config, get_config_template):
                     fg='red')
         # Logging is not yet configured at this point.
         click.secho(str(cve), fg='red')
-        return 2
+        sys.exit(1)
 
     logging.basicConfig(
         level=logging.INFO,
@@ -68,11 +68,11 @@ def main(ctx, config, get_config_template):
     try:
         publish_dashboards(config_manager.config)
     except Exception as e:
-        click.secho(str(e), fg='red')
-        return 2
+        click.secho(str(e), fg='red', err=True)
+        sys.exit(1)
 
-    return 0
+    sys.exit(0)
 
 
 if __name__ == "__main__":
-    sys.exit(main())  # pragma: no cover
+    main()
