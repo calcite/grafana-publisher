@@ -1,0 +1,14 @@
+docs/*
+tests/*
+.editorconfig
+.gitignore
+config_example.yaml
+CONTRIBUTING.rst
+HISTORY.rst
+make.ps1
+Makefile
+poetry.lock
+scratches.*
+setup.cfg
+test_config.yaml
+tox.ini
