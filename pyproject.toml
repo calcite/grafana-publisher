@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "grafana_publisher"
-version = "0.1.0"
+version = "0.2.0"
 description = "Script for publishing Grafana dashboards from a developer instance to a production instance."
 authors = ["Josef Nevrly <jnevrly@alps.cz>"]
 license = "Not open source"
