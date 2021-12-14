@@ -31,6 +31,15 @@ target_repo:
     oc_default: master
     oc_schema:
       type: string
+  commit_and_push:  # Whether commit and push to the target repo should be done by the Grafana Publisher.
+    oc_default: true
+    oc_schema:
+      type: boolean
+  commit_log_file:  # If set, the human-readable update summary will be output to a file.
+    oc_default: null
+    oc_schema:
+      type: string
+      nullable: true
   gitlab:   # If the target repo is on Gitlab instance, it's API can be used to check the update status without cloning.
     url:    # URL of the Gitlab instance storing the target repo.
       oc_default: null
@@ -47,3 +56,12 @@ target_repo:
       oc_schema:
         type: integer
         nullable: true
+
+general:
+  log_level:   # Logging level (use Python logging values - DEBUG, INFO, WARNING, ERROR, CRITICAL)
+    oc_default: INFO
+    oc_schema:
+      type: string
+      allowed: ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
+
+

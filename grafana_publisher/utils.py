@@ -173,10 +173,7 @@ class TargetRepoUtils:
                     cwd="."
                 )
 
-    def commit(self, change_list: List[Tuple[str, str]]) -> None:
-        self._run_cmd(["git", "add", "-A"], "Staging updates")
-
-        # Prepare commit message
+    def prepare_commit_msg(self, change_list: List[Tuple[str, str]]) -> str:
         if len(change_list) == 1:
             summary = change_list[0][0]
         else:
@@ -185,6 +182,11 @@ class TargetRepoUtils:
 
         commit_msg += "\n".join(
             [f"{dash}: {update_msg}\n" for dash, update_msg in change_list])
+        return commit_msg
+
+    def commit(self, change_list: List[Tuple[str, str]]) -> None:
+        self._run_cmd(["git", "add", "-A"], "Staging updates")
+        commit_msg = self.prepare_commit_msg(change_list)
         self._run_cmd(["git", "commit", "-m", commit_msg], "Comitting updates")
 
     def push(self) -> None:

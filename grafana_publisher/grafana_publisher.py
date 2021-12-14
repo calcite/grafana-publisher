@@ -88,9 +88,23 @@ def publish_dashboards(config):
                  grafana_api.get_publish_msg(dashboard["message"]))
             )
 
+        if config["target_repo"]["commit_and_push"]:
+            print("Is true")
+
         if change_list:
-            target_repo.commit(change_list)
-            target_repo.push()
+            if config["target_repo"]["commit_and_push"]:
+                target_repo.commit(change_list)
+                target_repo.push()
+            else:
+                logger.info("Skipping repo commit/push.")
+
+            if config["target_repo"]["commit_log_file"]:
+                with open(config["target_repo"]["commit_log_file"],
+                          "w") as summary_file:
+                    summary_file.write(
+                        target_repo.prepare_commit_msg(change_list))
+                    logger.info("Update log written to: %s",
+                                config["target_repo"]["commit_log_file"])
 
         logger.info("Done. %d dashboards updated.", len(change_list))
 
